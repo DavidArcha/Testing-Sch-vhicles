@@ -1,221 +1,62 @@
-/* General calendar container styling */
+/* Styling for the calendar */
 .calendar-container {
-  max-width: 100%;
-  margin: 20px auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Calendar header with month navigation */
-.calendar-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4f4f4;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.nav-arrow {
-  background: none;
-  border: none;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-/* Calendar days and weekdays */
-.calendar-days {
-  display: flex;
-  gap: 2px;
-}
-
-/* Each day in the calendar */
-.calendar-day {
-  width: 47px;
-  height: 47px;
-  border: 1px solid #ddd;
-  text-align: center;
-  padding: 5px;
-  position: relative;
-}
-
-/* Darker background for weekends in both calendar-day and car-day */
-.weekend {
-  background-color: #e0e0e0; /* Same color for weekend days */
-}
-
-/* Day header in the calendar (like Su, Mo, etc.) */
-.calendar-day-header {
-  font-weight: bold;
-}
-
-/* Styling for car-day and the smaller inner div */
-.car-day {
-  width: 47px;
-  height: 47px; /* Adjusted height for tooltip space */
-  border: 1px solid #ddd;
-  display: flex;
-  flex-direction: column; /* Stack inner-status and tooltip vertically */
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding-bottom: 5px; /* Add padding at the bottom for tooltip icon */
-}
-
-/* Smaller div inside car-day for availability status */
-.car-day .inner-status {
-  width: 20px;
-  height: 20px;
-  background-color: transparent; /* Default transparent background */
-  position: relative;
-}
-
-/* Available and unavailable statuses for the inner div */
-.available .inner-status {
-  background-color: #c8e6c9; /* Green for available */
-}
-
-.unavailable .inner-status {
-  background-color: #ffcccc; /* Red for unavailable */
-}
-
-/* Tooltip icon displayed only below red (unavailable) divs */
-.tooltip-icon {
-  font-size: 10px; /* Adjust icon size */
-  color: #ff0000; /* Red color for the icon */
-  margin-top: 2px; /* Space between inner-status and tooltip icon */
-}
-
-/* Tooltip icon image */
-.tooltip-icon img {
-  width: 100%;
-  height: 100%;
-}
-
-/* Styling for the car row and details */
-.car-row {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-/* Add bottom margin to the last car-row */
-.car-row:last-child {
-  margin-bottom: 20px; /* Creates space between the last car-row and the calendar at the bottom */
-}
-
-.car-details {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-/* Car model styling */
-.car-model {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-/* Car icon and button in a div with a dark background and left border */
-.car-actions {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  padding: 5px;
-  border-left: 3px solid #007bff;
-}
-
-/* Styling for the car icon using FontAwesome */
-.car-actions .car-icon {
-  font-size: 24px;
-  color: #007bff;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.edit-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-}
-
-/* Availability section */
-.car-availability {
-  display: flex;
-  gap: 2px;
-}
-
-/* Styling for the language toggle buttons */
-.language-toggle {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.language-toggle button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-}
-
-/* Modal for image preview */
-.image-preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* Centered content in the modal */
-.image-preview-content {
-  position: relative; /* To position the close button within the content */
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.image-preview-content img {
-  max-width: 100%;
-  max-height: 80vh;
-}
-
-/* Close button at the top-right corner of the modal */
-.close-button {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: #ff0000;
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 5px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Close button with a cross symbol */
-.close-button::before {
-  content: "×"; /* Cross symbol */
-  font-size: 20px;
-}
-
-/* Car rows container - adding vertical scrolling */
-.car-rows-container {
-  max-height: 300px; /* Adjust this height as necessary */
-  overflow-y: auto; /* Adds vertical scrolling if rows exceed max-height */
-}
+    max-width: 100%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: center; /* Center the month name and arrows */
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px;
+    font-weight: bold;
+    position: relative;
+  }
+  
+  .nav-arrow {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+  }
+  
+  .nav-arrow:first-child {
+    left: 10px; /* Left arrow */
+  }
+  
+  .nav-arrow:last-child {
+    right: 10px; /* Right arrow */
+  }
+  
+  .calendar-days {
+    display: flex; /* Flexbox for single-row layout */
+    gap: 2px;
+  }
+  
+  .calendar-day {
+    text-align: center;
+    padding: 5px;
+    flex: 1;
+    border: 1px solid #ddd;
+  }
+  
+  .calendar-day-header {
+    font-weight: bold;
+    background-color: #f4f4f4;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .weekend {
+    background-color: #e0e0e0; /* Darker background for weekends */
+  }
+  
+  .empty {
+    display: none; /* Hide empty boxes */
+  }
+  

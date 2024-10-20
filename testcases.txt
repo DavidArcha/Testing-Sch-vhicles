@@ -1,0 +1,69 @@
+import { TestBed } from '@angular/core/testing';
+import { ButtoncellrendererComponent } from './buttoncellrenderer.component';
+import { TestCaseResourceService } from './TestCase-resource.service';
+import { AppointmentComponent } from './appointment.component';
+import { DsToastService } from './ds-toast.service';
+import { of } from 'rxjs'; // Use 'of' to mock observables
+
+describe('ButtoncellrendererComponent', () => {
+  let component: ButtoncellrendererComponent;
+  let resourceService: jest.Mocked<TestCaseResourceService>;
+  let appointmentComponent: jest.Mocked<AppointmentComponent>;
+  let toastService: jest.Mocked<DsToastService>;
+
+  beforeEach(() => {
+    const resourceServiceMock = {
+      getRowDelete: jest.fn().mockReturnValue(of(true))
+    } as jest.Mocked<TestCaseResourceService>;
+
+    const appointmentComponentMock = {
+      getAppointmentList: jest.fn()
+    } as jest.Mocked<AppointmentComponent>;
+
+    const toastServiceMock = {
+      pushToast: jest.fn()
+    } as jest.Mocked<DsToastService>;
+
+    TestBed.configureTestingModule({
+      providers: [
+        ButtoncellrendererComponent,
+        { provide: TestCaseResourceService, useValue: resourceServiceMock },
+        { provide: AppointmentComponent, useValue: appointmentComponentMock },
+        { provide: DsToastService, useValue: toastServiceMock }
+      ]
+    });
+
+    component = TestBed.inject(ButtoncellrendererComponent);
+    resourceService = TestBed.inject(TestCaseResourceService) as jest.Mocked<TestCaseResourceService>;
+    appointmentComponent = TestBed.inject(AppointmentComponent) as jest.Mocked<AppointmentComponent>;
+    toastService = TestBed.inject(DsToastService) as jest.Mocked<DsToastService>;
+  });
+
+  it('should delete a row and call getAppointmentList', () => {
+    // Simulate button click
+    component.params = { data: { id: 1 } }; // Simulate params being passed
+    component.onButtonClick();
+
+    // Expect the delete call to have been made with the correct ID
+    expect(resourceService.getRowDelete).toHaveBeenCalledWith(1);
+
+    // Fast forward time to simulate timeout
+    jest.runAllTimers();
+
+    // Expect the appointment list to be updated
+    expect(appointmentComponent.getAppointmentList).toHaveBeenCalled();
+  });
+
+  it('should show a success toast after deletion', () => {
+    component.params = { data: { id: 1 } };
+    component.onButtonClick();
+
+    // Expect the toast to be shown
+    expect(toastService.pushToast).toHaveBeenCalledWith({
+      id: 'error-toast',
+      tone: 'positive',
+      toastText: 'Deleted successfully',
+      duration: 2000
+    });
+  });
+});
